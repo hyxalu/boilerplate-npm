@@ -5,6 +5,7 @@
 
 'use strict';
 
+var tools = require('./my-folder/tools');
 var fs = require('fs');
 var express = require('express');
 var app = express();
@@ -40,8 +41,13 @@ app.route('/')
 
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
-  res.status(404);
-  res.type('txt').send('Not found');
+  //var re = /January|February|March|April|May|June|July|August|September|October|November|December/;
+  var arg = req.path.substring(1);
+  //var bla = arg.replace(/%20/g, ' ');
+  //console.log(bla);
+  res.send(tools.parseArg(arg));
+  //res.status(404);
+  //res.type('txt').send('Not found');
 });
 
 // Error Middleware
